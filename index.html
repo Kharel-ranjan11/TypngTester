@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0ch;
+  }
+
+  body {
+    overflow: hidden;
+    background: #dde1e7;
+  }
+
+  .textarea {
+    margin-left: 20rem;
+    min-width: 750px;
+    height: 15vh;
+    max-width: 1000px;
+    border-radius: 10px;
+    padding: 25px;
+    background: #dde1e7;
+    box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.8),
+      2px 2px 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(90, 90, 200, 0.405);
+    color: rgb(9, 7, 7);
+    position: relative;
+    top: 20rem;
+  }
+
+  .color-green {
+    color: green;
+  }
+
+  .color-red {
+    color: red;
+  }
+
+  .next {
+    position: relative;
+    top: 22rem;
+    padding: 10px 20px 10px 20px;
+    font-size: x-large;
+    outline: none;
+    border-radius: 10px;
+    left: 20.3rem;
+    border: 1px solid black;
+  }
+
+  .color-green {
+    color: rgb(255, 255, 255);
+    background-color: green;
+  }
+
+  .color-red {
+    color: white;
+    background-color: red;
+  }
+
+  #letter {
+    text-shadow: 0 0 rgb(0, 0, 22);
+    font-size: x-large;
+    text-align: justify;
+  }
+
+  .hr-line {
+
+    position: relative;
+  }
+
+  .hr-line::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 10.9px;
+    bottom: 1px;
+    left: 0;
+    background-color: white;
+    animation: .5s blink infinite;
+  }
+
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  input {
+
+    opacity: 0;
+  }
+
+  /* .btn {
+                  height: 100%;
+                  width: 100%;
+                  background-color: rgba(127, 255, 212, 0.811);
+                  position: absolute;
+                  top: 0;
+                  backdrop-filter: blur(4px);
+
+
+         } */
+
+  /* .btn button {
+                  position: absolute;
+                  padding: 10px 20px 10px 20px;
+                  background-color: rgb(3, 3, 132);
+                  border: 0px;
+                  outline: 0;
+                  border-radius: 5px;
+                  color: white;
+                  font-size: x-large;
+                  cursor: pointer;
+                  box-shadow: 0px 4px 8px 0px rgb(31, 5, 62);
+                  top: 50%;
+
+                  left: 50%
+         }
+
+         .btn button:hover {
+                  background-color: rgb(4, 4, 59);
+
+         } */
+  .status {
+
+    font-size: larger;
+    font-weight: bold;
+    color: rgb(10, 4, 30);
+    display: flex;
+
+    font-family: cursive;
+    transform: translate(22rem, 19rem);
+    width: 60%;
+
+  }
+
+  .incorrect {
+    color: rgb(192, 10, 10);
+    margin: auto;
+  }
+
+  .correct {
+    color: rgb(10, 192, 55);
+    margin: auto;
+  }
+
+  .range {
+    background-color: rgb(192, 192, 198);
+    /* justify-content: space-around; */
+    position: relative;
+    border: 1px solid rgba(138, 117, 117, 0.673);
+    width: 20%;
+    height: 3vh;
+    margin-left: 12px;
+
+  }
+
+  .range span {
+    background: teal;
+    width: 0%;
+    position: absolute;
+    height: 3vh;
+    margin: auto auto;
+    text-align: center;
+    color: white;
+  }
+
+  header {
+    background: linear-gradient(to right, rgb(3, 249, 3), rgb(2, 2, 221), rgb(165, 3, 3));
+    color: aqua;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    position: relative;
+    left: 30%;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 5rem;
+    width: 45%;
+
+    text-transform: uppercase;
+    /* font-size:3rem; */
+  }
+</style>
+
+<body>
+  <header>
+    Typing Tester....
+  </header>
+  <div class="status">
+    <p class="incorrect">Wrong Typing:<b>0</b> </p>
+    <p class="correct"> Write Typing:<b>0</b> </p>
+    <p class="totallen"> Total Length:<b>0</b> </p>
+    <p class="range"><span>0%</span> </p>
+  </div>
+  <div class="textarea">
+    <code class="text" id="text">
+                            </code>
+    <form>
+      <input type="text" class="input" oninput="chang(this.value)">
+    </form>
+
+  </div>
+  <button onclick="load()" class="next">Next</button>
+  <!-- <div class="btn">
+
+                  <button onclick="start()">Start</button>
+         </div> -->
+</body>
+
+</html>
+<script>
+  let data = ["A B C D E F G H I  J K L M N O P Q R S T U V W X Y Z",
+    "a b cb d e f g h i j k l m n o p q r s t u v w x y z",
+    "1 2 8 c 5 d 0 0 S ! @ 8 A 9 ^ 9 0 ( ) , . ? / > w Q R X A",
+    "On the Insert tab, the galleries include items that are designed to coordinate with the overall look of your document.You can use these galleries to insert tables, headers, footers, lists,cover pages, and other document building blocks.",
+    "When you create pictures, charts, or diagrams,they also coordinate with your current document look.",
+    "You can easily change the formatting of selected text in the document text by choosing a look for the selected text from the Quick Styles gallery on  the Home tab.You can also format text directly by using the other controls on the Home tab.",
+    "Most controls offer a choice of using the look from the current theme or using a format that you specify directly.",
+    "To change the overall look of your document, choose new Theme elements on the Page Layout tab.",
+    "To change the looks available in the Quick Style gallery, use the Change Current Quick Style Set command.",
+    "When you create pictures, charts, or diagrams, they also coordinate with your current document look.",
+    "Both the Themes gallery and the Quick Styles gallery provide reset commands so that you can always restore the look of your document to the original contained in your current template.",
+    "On the Insert tab, the galleries include items that are designed to coordinate with the overall look of your document.",
+    "You can use these galleries to insert tables, headers, footers, lists, cover pages, and other document building blocks.",
+    "You can easily change the formatting of selected text in the document text by choosing a look for the selected text from the Quick Styles gallery on the Home tab.",
+    "You can also format text directly by using the other controls on the Home tab.Most controls offer a choice of using the look from the current theme or using a format that you specify directly."];
+  const words = document.querySelector(".text");
+  const input = document.querySelector(".input");
+  input.focus();
+  window.onclick = () => { input.focus(); }
+  function load() {
+    location.reload();
+  }
+  let randnum = Math.floor(Math.random() * data.length);
+  generate(randnum);
+  function generate(num) {
+    let str = ' ';
+    let datas = data[num].split("").forEach((l) => {
+      str += l;
+      words.innerHTML += `<span class="letter" id="letter" >${l}</span>`;
+    });
+  }
+  var code = document.getElementsByTagName("code");
+  // console.log(code);
+  let index = 0;
+  var span = document.getElementById("text");
+  let correctletter = 0;
+  let incorrectletter = 0;
+  function chang(text) {
+    let date = new Date().toLocaleDateString();
+    text.split("").forEach((l) => {
+      storeText = l;
+    });
+    for (let j = 0; j < code.length; j++) {
+      let letterTags = code[j].getElementsByTagName("span");
+      let rangevalue = (text.length / letterTags.length) * 100 + "%";
+      console.log(rangevalue);
+      document.querySelector(".range span").style.width = rangevalue;
+      document.querySelector(".range span").innerText = parseFloat(rangevalue).toFixed(2) + "%";
+
+      document.querySelector(".totallen b").innerText = letterTags.length
+      let letter = code[j].getElementsByTagName("span")[index++].innerText;
+      if (letterTags[index - 2] == undefined) {
+        letterTags[index - 1].classList.remove("hr-line");
+      } else {
+        letterTags[index - 1].classList.add("hr-line");
+        letterTags[index - 2].classList.remove("hr-line");
+      }
+      if (storeText == letter) {
+        letterTags[index - 1].classList.add("color-green");
+        correctletter++;
+        document.querySelector(".correct b").innerText = correctletter;
+
+      } else {
+        letterTags[index - 1].classList.add("color-red");
+        incorrectletter = incorrectletter + 1;
+        document.querySelector(".incorrect b").innerText = incorrectletter;
+      }
+      if (letterTags.length <= index) {
+        input.disabled = true;
+        location.reload();
+
+      }
+    }
+  }
+
+</script>
